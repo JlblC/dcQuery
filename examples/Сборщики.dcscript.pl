@@ -1,4 +1,4 @@
-my ($gath_name,$car_name) = ('сбор','перевозка');
+﻿my ($gath_name,$car_name) = ('сбор','перевозка');
 my @gathfleets = $Empire->fleets()->getFleetsByName($gath_name);
 foreach (@gathfleets)
   {
