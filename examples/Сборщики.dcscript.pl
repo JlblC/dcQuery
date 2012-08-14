@@ -17,5 +17,5 @@ foreach (@carfleets)
     next unless $box;
     $box->transferToAnotherFleet(0);
     $box->unpack;
-    $_->jump(split(/:/,_('ReturnFor'))); 
+    $_->jump(split(/:/,_('$ReturnFor.id'))); 
   }
