@@ -1,4 +1,4 @@
-##### dcQuery v0.1.1
+##### dcQuery v0.2.1
 sub _ {
 	local $_=$_;
 	my $arg;
@@ -21,6 +21,9 @@ sub _ {
 			foreach $el (split /,/,$_[0]) {push @result,_s($el)};	
 			return \@result;
 		}
+		if (index($_[0],'$')==0){			
+			return $Empire->readVariable(_s(substr $_[0],1)) ;	
+		}		
 		if (index($_[0],':')!=-1){			
 			foreach $el (split /:/,$_[0]) {push @result,_s($el)};	
 			return join ":",@result;	
@@ -29,14 +32,15 @@ sub _ {
 			foreach $el (split /\./,$_[0]) {push @result,_s($el)};	
 			return join "",@result;	
 		}
-
+		
 		if (index($_[0],'^')!=-1){
 			my ($a,$b)=split /\^/,$_[0];
 			local $_=_s($a) if $a;
 			$b ? / \Q$b\E="([^\"]*)"/ : /<(\w+)\b/;
 			return $1;			
 		}
-		
+				
+		return substr($_[0],1) if index($_[0],'`')==0;
 		return $_->getProp($_[0]) if defined $_->getProp($_[0]);
 		$Empire->log(3,"dcQuery ERROR parametr ".$_[0])
 	}
