@@ -1,4 +1,4 @@
-##### dcQuery v0.2.1
+##### dcQuery v0.2.1 https://github.com/JlblC/dcQuery
 sub _ {
 	local $_=$_;
 	my $arg;
