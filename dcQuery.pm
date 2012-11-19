@@ -1,4 +1,4 @@
-##### dcQuery v0.2.1 https://github.com/JlblC/dcQuery
+##### dcQuery v0.2.2 https://github.com/JlblC/dcQuery
 sub _ {
 	local $_=$_;
 	my $arg;
@@ -12,7 +12,8 @@ sub _ {
 		return _s($_[0]) if ref \$_[0] eq "SCALAR";
 		return &{$_[0]} if ref $_[0] eq "CODE";
 		return $_[0] if index(ref $_[0],"Safe::Hole::main")!=-1;
-		$Empire->log(3,"dcQuery ERROR type parametr type ". ref $_[0]);		
+		$Empire->log(3,"dcQuery ERROR type parametr type ". ref $_[0]);
+		return undef;		
 	}
 
 	sub _s {
@@ -42,6 +43,7 @@ sub _ {
 				
 		return substr($_[0],1) if index($_[0],'`')==0;
 		return $_->getProp($_[0]) if defined $_->getProp($_[0]);
-		$Empire->log(3,"dcQuery ERROR parametr ".$_[0])
+		$Empire->log(3,"dcQuery ERROR parametr ".$_[0]);
+		return undef;
 	}
 }
