@@ -8,7 +8,7 @@ sub _ {
 	return @{$_} if ref $_ eq "ARRAY";
 	return $_;
 
-	sub _1 {		
+	sub _1 {	# вызывается для каждого аргумента	
 		return _s($_[0]) if ref \$_[0] eq "SCALAR";
 		return &{$_[0]} if ref $_[0] eq "CODE";
 		return $_[0] if index(ref $_[0],"Safe::Hole::main")!=-1;
@@ -16,7 +16,7 @@ sub _ {
 		return undef;		
 	}
 
-	sub _s {
+	sub _s {        # вызывается для скалярного (строкового) аргуманта
 		my @result;
 		if (index($_[0],',')!=-1){			
 			foreach $el (split /,/,$_[0]) {push @result,_s($el)};	
